@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Homepage.css';
 
-const Navbar = ({ onInfoClick }) => {
+const Navbar = ({ onInfoClick, onLegacyClick }) => {
     return (
         <nav className="navbar">
             <ul className="navbar-links">
@@ -24,7 +24,7 @@ const Navbar = ({ onInfoClick }) => {
                     </div>
                 </li>
                 <li className="dropdown">
-                    <button className="dropbtn">Legacy</button>
+                    <button className="dropbtn" onClick={onLegacyClick}>Legacy</button>
                     <div className="dropdown-content">
                         <a href="/legacy1">Legacy 1</a>
                     </div>
