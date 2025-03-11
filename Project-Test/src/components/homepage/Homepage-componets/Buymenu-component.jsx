@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import items from './items.json';
 import '../Homepage.css';
 
 const BuyMenu = ({ cookies, setCookies, cps, setCps }) => {
-    const [items] = useState([
-        { name: 'Cursor', cost: 15, cps: 0.1 },
-        { name: 'Grandma', cost: 100, cps: 1 },
-        { name: 'Farm', cost: 500, cps: 8 },
-    ]);
+    const [itemCosts, setItemCosts] = useState(items.map(item => item.cost));
+    const [visibleItems, setVisibleItems] = useState(new Array(items.length).fill(false));
 
-    const buyItem = (item) => {
-        if (cookies >= item.cost) {
-            setCookies(cookies - item.cost);
+    useEffect(() => {
+        const newVisibleItems = visibleItems.map((visible, index) => visible || cookies >= itemCosts[index] / 2);
+        setVisibleItems(newVisibleItems);
+    }, [cookies, itemCosts, visibleItems]);
+
+    const buyItem = (item, index) => {
+        if (cookies >= itemCosts[index]) {
+            setCookies(cookies - itemCosts[index]);
             setCps(cps + item.cps);
+            const newCosts = [...itemCosts];
+            newCosts[index] = Math.round(newCosts[index] * 1.05);
+            setItemCosts(newCosts);
         } else {
             alert('Not enough cookies!');
         }
@@ -23,9 +29,14 @@ const BuyMenu = ({ cookies, setCookies, cps, setCps }) => {
             <ul>
                 {items.map((item, index) => (
                     <li key={index}>
-                        <button onClick={() => buyItem(item)}>
-                            {item.name} - Cost: {item.cost} cookies, CPS: {item.cps}
-                        </button>
+                        {(index === 0 || visibleItems[index]) && (
+                            <button 
+                                onClick={() => buyItem(item, index)} 
+                                disabled={cookies < itemCosts[index]}
+                            >
+                                {item.name} - Cost: {itemCosts[index]} cookies, CPS: {item.cps}
+                            </button>
+                        )}
                     </li>
                 ))}
             </ul>

@@ -25,10 +25,16 @@ const Homepage = () => {
             <header>
                 <h1>Cookie Clicker</h1>
             </header>
-            <Navbar />
+            <div>
+                <Navbar />
+            </div>
             <section>
-                <ClickerComponent cookies={cookies} handleClick={handleClick} cps={cps} />
-                <BuyMenu cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} />
+                <div>
+                    <ClickerComponent cookies={cookies} handleClick={handleClick} cps={cps} />
+                </div>
+                <div>
+                    <BuyMenu cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} />
+                </div>
             </section>
         </main>
     );
