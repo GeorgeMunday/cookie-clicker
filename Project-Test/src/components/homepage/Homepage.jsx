@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Homepage-componets/Navbar-component.jsx';
 import ClickerComponent from './Homepage-componets/Clicker-component.jsx';
 import BuyMenu from './Homepage-componets/Buymenu-component.jsx';
+import InfoPage from '../infopage/infopage.jsx';
 import './Homepage.css';
 
 const Homepage = () => {
     const [cookies, setCookies] = useState(0);
     const [cps, setCps] = useState(0);
+    const [showInfoPage, setShowInfoPage] = useState(false);
 
     const handleClick = () => {
         setCookies(cookies + 1);
@@ -20,13 +22,21 @@ const Homepage = () => {
         return () => clearInterval(interval);
     }, [cps]);
 
+    const handleInfoClick = () => {
+        setShowInfoPage(true);
+    };
+
+    const handleCloseInfoPage = () => {
+        setShowInfoPage(false);
+    };
+
     return (
         <main>
             <header>
                 <h1>Cookie Clicker</h1>
             </header>
             <div>
-                <Navbar />
+                <Navbar onInfoClick={handleInfoClick} />
             </div>
             <section>
                 <div>
@@ -36,6 +46,7 @@ const Homepage = () => {
                     <BuyMenu cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} />
                 </div>
             </section>
+            {showInfoPage && <InfoPage onClose={handleCloseInfoPage} />}
         </main>
     );
 };

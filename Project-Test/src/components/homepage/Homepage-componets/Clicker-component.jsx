@@ -8,7 +8,7 @@ const ClickerComponent = ({ cookies, handleClick, cps }) => {
     const handleClickInternal = () => {
         const now = Date.now();
         if (lastClickTime) {
-            const timeDiff = (now - lastClickTime) / 1000; // time difference in seconds
+            const timeDiff = (now - lastClickTime) / 1000;
             setClicksPerSecond(1 / timeDiff);
         }
         setLastClickTime(now);
