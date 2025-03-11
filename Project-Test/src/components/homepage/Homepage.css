@@ -1,0 +1,14 @@
+.cookie {
+    background-image: url('./cookies.jpg');
+    cursor: pointer;
+    border:none;
+    width: 250px;
+    height: 250px;
+    background-size: 100%, 100%;
+    background-repeat: no-repeat;
+}
+
+.navbar {
+    overflow: hidden;
+    white-space: nowrap;
+}
