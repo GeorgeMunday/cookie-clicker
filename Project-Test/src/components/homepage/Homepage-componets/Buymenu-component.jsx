@@ -26,9 +26,9 @@ const BuyMenu = ({ cookies, setCookies, cps, setCps, itemCpsMultiplier }) => {
     };
 
     return (
-        <div>
-            <h2>Buy Menu</h2>
-            <ul>
+        <div className="buy-menu">
+            <h2 className = 'sub-header'>Buy Menu</h2>
+            <ul className = 'item-list'>
                 {items.map((item, index) => (
                     <li key={index}>
                         {(index === 0 || visibleItems[index]) && (
@@ -36,7 +36,7 @@ const BuyMenu = ({ cookies, setCookies, cps, setCps, itemCpsMultiplier }) => {
                                 onClick={() => buyItem(item, index)} 
                                 disabled={cookies < itemCosts[index]}
                             >
-                                {item.name} - Cost: {itemCosts[index]} cookies, CPS: {item.cps * itemCpsMultiplier}
+                                {item.name} - Cost: {itemCosts[index]} cookies
                             </button>
                         )}
                     </li>

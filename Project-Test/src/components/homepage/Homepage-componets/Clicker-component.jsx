@@ -26,10 +26,10 @@ const ClickerComponent = ({ cookies, handleClick, cps }) => {
     const totalCps = cps + clicksPerSecond;
 
     return (
-        <div>
-            <p>Cookies: {cookies.toFixed(1)}</p>
-            <p> cookies per second: {totalCps.toFixed(1)}</p>
-            <button className="cookie" onClick={handleClickInternal}>Click me!</button>
+        <div className="clicker">
+            <p className = 'sub-header'>cookies: {cookies.toFixed(1)}</p>
+            <p className = 'sub-header'> cookies per second: {totalCps.toFixed(1)}</p>
+            <button className="cookie" onClick={handleClickInternal}></button>
         </div>
     );
 };

@@ -43,17 +43,15 @@ const Homepage = () => {
 
     return (
         <main>
-            <header>
-                <h1>Cookie Clicker</h1>
-            </header>
-            <div>
+            <div class = "navbar">
                 <Navbar onInfoClick={handleInfoClick} onLegacyClick={handleLegacyClick} />
             </div>
+            <header>
+                <h1>Digging for Cookies</h1>
+            </header>
             <section>
-                <div>
+                <div className="game-container">
                     <ClickerComponent cookies={cookies} handleClick={handleClick} cps={cps} />
-                </div>
-                <div>
                     <BuyMenu cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} itemCpsMultiplier={itemCpsMultiplier} />
                 </div>
             </section>
