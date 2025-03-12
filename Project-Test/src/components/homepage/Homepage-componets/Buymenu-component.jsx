@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import items from './items.json';
 import '../Homepage.css';
 
-const BuyMenu = ({ cookies, setCookies, cps, setCps }) => {
+const BuyMenu = ({ cookies, setCookies, cps, setCps, itemCpsMultiplier }) => {
     const [itemCosts, setItemCosts] = useState(items.map(item => item.cost));
     const [visibleItems, setVisibleItems] = useState(new Array(items.length).fill(false));
 
@@ -16,7 +16,7 @@ const BuyMenu = ({ cookies, setCookies, cps, setCps }) => {
     const buyItem = (item, index) => {
         if (cookies >= itemCosts[index]) {
             setCookies(cookies - itemCosts[index]);
-            setCps(cps + item.cps);
+            setCps(cps + item.cps * itemCpsMultiplier);
             const newCosts = [...itemCosts];
             newCosts[index] = Math.round(newCosts[index] * 1.05);
             setItemCosts(newCosts);
@@ -36,7 +36,7 @@ const BuyMenu = ({ cookies, setCookies, cps, setCps }) => {
                                 onClick={() => buyItem(item, index)} 
                                 disabled={cookies < itemCosts[index]}
                             >
-                                {item.name} - Cost: {itemCosts[index]} cookies, CPS: {item.cps}
+                                {item.name} - Cost: {itemCosts[index]} cookies, CPS: {item.cps * itemCpsMultiplier}
                             </button>
                         )}
                     </li>

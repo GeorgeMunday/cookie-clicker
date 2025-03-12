@@ -11,6 +11,7 @@ const Homepage = () => {
     const [cps, setCps] = useState(0);
     const [showInfoPage, setShowInfoPage] = useState(false);
     const [showLegacyPage, setShowLegacyPage] = useState(false);
+    const [itemCpsMultiplier, setItemCpsMultiplier] = useState(1);
 
     const handleClick = () => {
         setCookies(cookies + 1);
@@ -53,11 +54,11 @@ const Homepage = () => {
                     <ClickerComponent cookies={cookies} handleClick={handleClick} cps={cps} />
                 </div>
                 <div>
-                    <BuyMenu cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} />
+                    <BuyMenu cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} itemCpsMultiplier={itemCpsMultiplier} />
                 </div>
             </section>
             {showInfoPage && <InfoPage onClose={handleCloseInfoPage} />}
-            {showLegacyPage && <LegacyPage onClose={handleCloseLegacyPage} cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} />}
+            {showLegacyPage && <LegacyPage onClose={handleCloseLegacyPage} cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} setItemCpsMultiplier={setItemCpsMultiplier} />}
         </main>
     );
 };
