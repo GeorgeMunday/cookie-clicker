@@ -8,8 +8,10 @@ const BuyMenu = ({ cookies, setCookies, cps, setCps }) => {
 
     useEffect(() => {
         const newVisibleItems = visibleItems.map((visible, index) => visible || cookies >= itemCosts[index] / 2);
-        setVisibleItems(newVisibleItems);
-    }, [cookies, itemCosts, visibleItems]);
+        if (JSON.stringify(newVisibleItems) !== JSON.stringify(visibleItems)) {
+            setVisibleItems(newVisibleItems);
+        }
+    }, [cookies, itemCosts]);
 
     const buyItem = (item, index) => {
         if (cookies >= itemCosts[index]) {

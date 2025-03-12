@@ -7,27 +7,15 @@ const Navbar = ({ onInfoClick, onLegacyClick }) => {
             <ul className="navbar-links">
                 <li className="dropdown">
                     <button className="dropbtn">Options</button>
-                    <div className="dropdown-content">
-                        <a href="/option1">Option 1</a>
-                    </div>
                 </li>
                 <li className="dropdown">
                     <button className="dropbtn" onClick={onInfoClick}>Info</button>
-                    <div className="dropdown-content">
-                        <a href="/info1">Info 1</a>
-                    </div>
                 </li>
                 <li className="dropdown">
                     <button className="dropbtn">Stats</button>
-                    <div className="dropdown-content">
-                        <a href="/stats1">Stats 1</a>
-                    </div>
                 </li>
                 <li className="dropdown">
                     <button className="dropbtn" onClick={onLegacyClick}>Legacy</button>
-                    <div className="dropdown-content">
-                        <a href="/legacy1">Legacy 1</a>
-                    </div>
                 </li>
             </ul>
         </nav>
