@@ -4,6 +4,7 @@ import ClickerComponent from './Homepage-componets/Clicker-component.jsx';
 import BuyMenu from './Homepage-componets/Buymenu-component.jsx';
 import InfoPage from '../infopage/infopage.jsx';
 import LegacyPage from '../legacypage/legacypage.jsx';
+import OptionPage from '../optionspage/optionspage.jsx';
 import './Homepage.css';
 
 const Homepage = () => {
@@ -11,6 +12,7 @@ const Homepage = () => {
     const [cps, setCps] = useState(0);
     const [showInfoPage, setShowInfoPage] = useState(false);
     const [showLegacyPage, setShowLegacyPage] = useState(false);
+    const [showOptionPage, setShowOptionPage] = useState(false);
     const [itemCpsMultiplier, setItemCpsMultiplier] = useState(1);
 
     const handleClick = () => {
@@ -41,22 +43,33 @@ const Homepage = () => {
         setShowLegacyPage(false);
     };
 
+    const handleCloseOptionPage = () => {
+        setShowOptionPage(false); // Corrected to setShowOptionPage
+    };
+
+    const handleOptionClick = () => {
+        setShowOptionPage(true); // Corrected to setShowOptionPage
+    };
+
     return (
         <main>
-            <div class = "navbar">
-                <Navbar onInfoClick={handleInfoClick} onLegacyClick={handleLegacyClick} />
-            </div>
             <header>
-                <h1>Digging for Cookies</h1>
+                <div className='title'>
+                    <h1>Digging for Cookies</h1>
+                </div>
+                <div className="navbar">
+                    <Navbar onInfoClick={handleInfoClick} onLegacyClick={handleLegacyClick} />
+                </div>
             </header>
             <section>
                 <div className="game-container">
-                    <ClickerComponent cookies={cookies} handleClick={handleClick} cps={cps} />
+                    <ClickerComponent cookies={cookies} setCookies={setCookies} handleClick={handleClick} cps={cps} />
                     <BuyMenu cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} itemCpsMultiplier={itemCpsMultiplier} />
                 </div>
             </section>
             {showInfoPage && <InfoPage onClose={handleCloseInfoPage} />}
             {showLegacyPage && <LegacyPage onClose={handleCloseLegacyPage} cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} setItemCpsMultiplier={setItemCpsMultiplier} />}
+            {showOptionPage && <OptionPage onClose={handleCloseOptionPage} />}
         </main>
     );
 };
