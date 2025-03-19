@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import items from './items.json';
-import upgrades from './upgrades.json'; // Import JSON file
+import upgrades from './upgrades.json'; 
 import '../Homepage.css';
 
 const BuyMenu = ({ cookies, setCookies, cps, setCps, itemCpsMultiplier, clickPower, setClickPower }) => {
     const [itemCosts, setItemCosts] = useState(items.map(item => item.cost));
     const [visibleItems, setVisibleItems] = useState(new Array(items.length).fill(false));
-    const[visibleupgrades,setVisibleupgrades] = useState(new Array(items.length).fill(false))
+    const [visibleUpgrades, setVisibleUpgrades] = useState(new Array(upgrades.length).fill(false));
     const [upgradeCosts, setUpgradeCosts] = useState(upgrades.map(upgrade => upgrade.cost));
 
     useEffect(() => {
         const newVisibleItems = visibleItems.map((visible, index) => visible || cookies >= itemCosts[index] / 2);
+        const lowestCostItemIndex = itemCosts.indexOf(Math.min(...itemCosts));
+        newVisibleItems[lowestCostItemIndex] = true;
         if (JSON.stringify(newVisibleItems) !== JSON.stringify(visibleItems)) {
             setVisibleItems(newVisibleItems);
         }
-    }, [cookies, upgradeCosts, visibleupgrades]);
+    }, [cookies, itemCosts, visibleItems]);
 
     useEffect(() => {
-        const newVisibleupgrades = visibleupgrades.map((visible, index) => visible || cookies >= upgradeCosts[index] / 2);
-        if (JSON.stringify(newVisibleupgrades) !== JSON.stringify(visibleupgrades)) {
-            setVisibleupgrades(newVisibleupgrades);
+        const newVisibleUpgrades = visibleUpgrades.map((visible, index) => visible || cookies >= upgradeCosts[index] / 2);
+        const lowestCostUpgradeIndex = upgradeCosts.indexOf(Math.min(...upgradeCosts));
+        newVisibleUpgrades[lowestCostUpgradeIndex] = true;
+        if (JSON.stringify(newVisibleUpgrades) !== JSON.stringify(visibleUpgrades)) {
+            setVisibleUpgrades(newVisibleUpgrades);
         }
-    }, [cookies, itemCosts, visibleItems]);
+    }, [cookies, upgradeCosts, visibleUpgrades]);
 
     const buyItem = (item, index) => {
         if (cookies >= itemCosts[index]) {
@@ -38,40 +42,49 @@ const BuyMenu = ({ cookies, setCookies, cps, setCps, itemCpsMultiplier, clickPow
     const buyUpgrade = (index) => {
         if (cookies >= upgradeCosts[index]) {
             setCookies(cookies - upgradeCosts[index]);
-            setClickPower(clickPower + upgrades[index].clickPowerIncrease); // Use clickPowerIncrease from upgrades.json
+            setClickPower(clickPower + upgrades[index].clickPowerIncrease); 
             const newCosts = [...upgradeCosts];
-            newCosts[index] = Math.round(newCosts[index] * 1.5);
+            newCosts[index] = Math.round(newCosts[index] * 3);
             setUpgradeCosts(newCosts);
         } else {
             alert('Not enough cookies!');
         }
     };
 
+    const getVisibleItemsAndUpgrades = () => {
+        const visibleItemsList = items
+            .map((item, index) => ({ ...item, cost: itemCosts[index], index }))
+            .filter((item, index) => visibleItems[index]);
+
+        const visibleUpgradesList = upgrades
+            .map((upgrade, index) => ({ ...upgrade, cost: upgradeCosts[index], index }))
+            .filter((upgrade, index) => visibleUpgrades[index]);
+
+        return [...visibleItemsList, ...visibleUpgradesList].sort((a, b) => a.cost - b.cost);
+    };
+
+    const visibleItemsAndUpgrades = getVisibleItemsAndUpgrades();
+
     return (
         <div className="buy-menu">
             <h2 className='sub-header'>Buy Menu</h2>
             <ul className='item-list'>
-                {items.map((item, index) => (
+                {visibleItemsAndUpgrades.map((item, index) => (
                     <li key={index}>
-                        {(index === 0 || visibleItems[index]) && (
+                        {item.cps !== undefined ? (
                             <button 
-                                onClick={() => buyItem(item, index)} 
-                                disabled={cookies < itemCosts[index]}
+                                onClick={() => buyItem(item, item.index)} 
+                                disabled={cookies < item.cost}
                             >
-                                {item.name} - Cost: {itemCosts[index]} cookies 
+                                {item.name} - Cost: {item.cost} cookies 
                             </button>
-                        )}
-                    </li>
-                ))}
-                {upgradeCosts.map((cost, index) => (
-                    <li key={index + items.length}>
-                        {(index === 0  || visibleupgrades[index]) && (
-                        <button 
-                            onClick={() => buyUpgrade(index)} 
-                            disabled={cookies < cost}
-                        >
-                            Upgrade Click Power - Cost: {cost} cookies
-                        </button>
+                        ) : (
+                            <button 
+                                onClick={() => buyUpgrade(item.index)} 
+                                disabled={cookies < item.cost}
+                            >
+                                Upgrade Click Power - Cost: {item.cost} cookies
+                            </button>
                         )}
                     </li>
                 ))}

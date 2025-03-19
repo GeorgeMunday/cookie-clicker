@@ -12,10 +12,10 @@ const Homepage = () => {
     const [showInfoPage, setShowInfoPage] = useState(false);
     const [showLegacyPage, setShowLegacyPage] = useState(false);
     const [itemCpsMultiplier, setItemCpsMultiplier] = useState(1);
-    const [clickPower, setClickPower] = useState(1); // Add clickPower state
+    const [clickPower, setClickPower] = useState(1); 
 
     const handleClick = () => {
-        setCookies(cookies + clickPower); // Use clickPower to increase cookies per click
+        setCookies(cookies + clickPower); 
     };
 
     useEffect(() => {

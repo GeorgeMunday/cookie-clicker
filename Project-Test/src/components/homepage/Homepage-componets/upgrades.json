@@ -1,5 +1,5 @@
 [
     { "cost": 10, "clickPowerIncrease": 1 },
-    { "cost": 75, "clickPowerIncrease": 5 },
-    { "cost": 500, "clickPowerIncrease": 10 }
+    { "cost": 2000, "clickPowerIncrease": 10 },
+    { "cost": 500000000, "clickPowerIncrease": 100 }
 ]
