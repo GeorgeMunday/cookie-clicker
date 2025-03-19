@@ -3,7 +3,7 @@ import items from './items.json';
 import upgrades from './upgrades.json'; 
 import '../Homepage.css';
 
-const BuyMenu = ({ cookies, setCookies, cps, setCps, itemCpsMultiplier, clickPower, setClickPower }) => {
+const BuyMenu = ({ cookies, setCookies, cps, setCps, itemCpsMultiplier, clickPower, setClickPower, onItemBought, onUpgradeBought }) => {
     const [itemCosts, setItemCosts] = useState(items.map(item => item.cost));
     const [visibleItems, setVisibleItems] = useState(new Array(items.length).fill(false));
     const [visibleUpgrades, setVisibleUpgrades] = useState(new Array(upgrades.length).fill(false));
@@ -34,6 +34,7 @@ const BuyMenu = ({ cookies, setCookies, cps, setCps, itemCpsMultiplier, clickPow
             const newCosts = [...itemCosts];
             newCosts[index] = Math.round(newCosts[index] * 1.05);
             setItemCosts(newCosts);
+            onItemBought(index);
         } else {
             alert('Not enough cookies!');
         }
@@ -46,6 +47,7 @@ const BuyMenu = ({ cookies, setCookies, cps, setCps, itemCpsMultiplier, clickPow
             const newCosts = [...upgradeCosts];
             newCosts[index] = Math.round(newCosts[index] * 3);
             setUpgradeCosts(newCosts);
+            onUpgradeBought(index);
         } else {
             alert('Not enough cookies!');
         }

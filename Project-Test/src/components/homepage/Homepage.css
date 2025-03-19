@@ -1,89 +1,132 @@
-.body {
-    background-color: #474040;
-    font-family: Arial, sans-serif;
+body {
+    font-family: 'Press Start 2P', cursive;
     margin: 0;
     padding: 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
 }
 
 header {
-    color: white;
+    background-color: #222;
+    color: #ffcc00;
     text-align: center;
-    padding: 10px;
-    border-radius: 100px;
+    padding: 2vh;
+    border: 0.2vh solid #ffcc00;
+    margin-bottom: 2vh;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .cookie {
-    background-image: url('/download.png');
+    background-image: url('/cookie.png');
+    background-color: #222;
     cursor: pointer;
-    border:none;
     width: 35vh;
     height: 35vh;
-    background-size: 100%, 100%;
+    background-size: cover;
     background-repeat: no-repeat;
-    border-radius: 200px;
-    display: flex;
+    border-radius: 50%;
+    transition: background-image 0.3s ease, transform 0.1s ease;
+    margin: 2vh 0;
+    border: none;
 }
 
 .cookie:active {
-    transition-duration: 0.3s;
-    background-image: url('/pickaxe swing.png');
+    transform: scale(0.95);
 }
 
 li {
     list-style-type: none;
 }
 
-
 .navbar-links {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+    padding: 1vh;
+    background-color: #222;
+    border-bottom: 0.2vh solid #ffcc00;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .navbar-links button {
-    font-style: italic;
-    color: white;
-    text-align: center;
-    padding: 5px;
-    border-radius: 100px;
-    border-color: #ffffff;
-    border: none;
+    color: #ffcc00;
+    padding: 1vh 2vh;
+    border: 0.2vh solid #ffcc00;
+    background-color: #222;
+    border-radius: 0.5vh;
+    transition: background-color 0.3s ease;
+    font-family: 'Press Start 2P', cursive;
+    width: 100%;
 }
 
-.game-container {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
+.navbar-links button:hover {
+    background-color: #ffcc00;
+    color: #222;
 }
+
 .buy-menu {
-    float: right;
-    height: 100vh;
-    width: 50vh;
+    color: #ffcc00;
+    width: 100%;
+    background-color: #222;
+    padding: 2vh;
+    border-radius: 1vh;
+    box-shadow: 0 0 1vh rgba(255, 204, 0, 0.5);
+    border: 0.2vh solid #ffcc00;
+    margin-top: 2vh;
+    box-sizing: border-box;
+    text-align: center;
+    overflow-y: scroll;
+    max-height: 20vh;
 }
 
-.sub-header{
-    color: white;
-    text-align: center;
-    padding: 10px;
-    border-radius: 100px;
+.buy-menu::-webkit-scrollbar {
+    width: 0.5vh;
 }
 
-.item-list {
-    color: white;
-    padding: 10px;
-    margin: 10px;
-    height: 80vh;
-    text-align: center;
+.buy-menu::-webkit-scrollbar-thumb {
+    background-color: #ffcc00;
+    border-radius: 1vh;
+}
+
+.buy-menu::-webkit-scrollbar-track {
+    background-color: #222;
+}
+
+.buy-menu button {
+    display: inline-block;
+    margin: 1vh auto;
 }
 
 .item-list button {
-    color: rgb(0, 0, 0);
+    color: #ffcc00;
     text-align: center;
-    padding: 5px;
-    border-color: #000000;
-    width: 300px;
+    padding: 1vh;
+    border: 0.2vh solid #ffcc00;
+    width: 100%;
+    margin-bottom: 1vh;
+    background-color: #222;
+    border-radius: 0.5vh;
+    transition: background-color 0.3s ease;
+    font-family: 'Press Start 2P', cursive;
 }
 
-.clicker {
-    width: 100vh;
+.item-list button:hover {
+    background-color: #ffcc00;
+    color: #222;
 }
+
+.clicker .button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Import the retro font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');

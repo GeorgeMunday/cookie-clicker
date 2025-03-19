@@ -27,9 +27,11 @@ const ClickerComponent = ({ cookies, handleClick, cps, clickPower }) => {
 
     return (
         <div className="clicker">
+            <header>
             <p className='sub-header'>cookies: {cookies.toFixed(1)}</p>
             <p className='sub-header'>cookies per second: {totalCps.toFixed(1)}</p>
             <p className='sub-header'>click power: {clickPower}</p> 
+            </header>
             <button className="cookie" onClick={handleClickInternal}></button>
         </div>
     );
