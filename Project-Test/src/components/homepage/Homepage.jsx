@@ -12,9 +12,10 @@ const Homepage = () => {
     const [showInfoPage, setShowInfoPage] = useState(false);
     const [showLegacyPage, setShowLegacyPage] = useState(false);
     const [itemCpsMultiplier, setItemCpsMultiplier] = useState(1);
+    const [clickPower, setClickPower] = useState(1); // Add clickPower state
 
     const handleClick = () => {
-        setCookies(cookies + 1);
+        setCookies(cookies + clickPower); // Use clickPower to increase cookies per click
     };
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const Homepage = () => {
 
     return (
         <main>
-            <div class = "navbar">
+            <div className="navbar">
                 <Navbar onInfoClick={handleInfoClick} onLegacyClick={handleLegacyClick} />
             </div>
             <header>
@@ -51,8 +52,8 @@ const Homepage = () => {
             </header>
             <section>
                 <div className="game-container">
-                    <ClickerComponent cookies={cookies} handleClick={handleClick} cps={cps} />
-                    <BuyMenu cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} itemCpsMultiplier={itemCpsMultiplier} />
+                    <ClickerComponent cookies={cookies} handleClick={handleClick} cps={cps} clickPower={clickPower} />
+                    <BuyMenu cookies={cookies} setCookies={setCookies} cps={cps} setCps={setCps} itemCpsMultiplier={itemCpsMultiplier} clickPower={clickPower} setClickPower={setClickPower} />
                 </div>
             </section>
             {showInfoPage && <InfoPage onClose={handleCloseInfoPage} />}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../Homepage.css';
 
-const ClickerComponent = ({ cookies, handleClick, cps }) => {
+const ClickerComponent = ({ cookies, handleClick, cps, clickPower }) => {
     const [clicksPerSecond, setClicksPerSecond] = useState(0);
     const [lastClickTime, setLastClickTime] = useState(null);
 
@@ -27,8 +27,9 @@ const ClickerComponent = ({ cookies, handleClick, cps }) => {
 
     return (
         <div className="clicker">
-            <p className = 'sub-header'>cookies: {cookies.toFixed(1)}</p>
-            <p className = 'sub-header'> cookies per second: {totalCps.toFixed(1)}</p>
+            <p className='sub-header'>cookies: {cookies.toFixed(1)}</p>
+            <p className='sub-header'>cookies per second: {totalCps.toFixed(1)}</p>
+            <p className='sub-header'>click power: {clickPower}</p> {/* Display click power */}
             <button className="cookie" onClick={handleClickInternal}></button>
         </div>
     );
